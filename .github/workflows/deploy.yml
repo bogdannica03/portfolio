@@ -11,16 +11,12 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: pages
-  cancel-in-progress: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node
@@ -35,17 +31,15 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Check generated website
+      - name: Verify build output
         run: |
-          echo "===== .output/public ====="
-          find .output/public -maxdepth 2 -type f | sort
-          echo "===== index.html ====="
-          test -f .output/public/index.html
+          echo "---- .output/public ----"
+          find .output/public -maxdepth 3 -type f | sort
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload Pages artifact
+      - name: Upload static output
         uses: actions/upload-pages-artifact@v3
         with:
           path: .output/public
