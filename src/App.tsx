@@ -1,25 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
-
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Bogdan Nica — Senior Full Stack Engineer" },
-      {
-        name: "description",
-        content:
-          "Senior Full Stack & AI Engineer with 10+ years building scalable web platforms with Python, TypeScript, Django, NestJS, React and Next.js.",
-      },
-      { property: "og:title", content: "Bogdan Nica — Senior Full Stack Engineer" },
-      {
-        property: "og:description",
-        content:
-          "10+ years designing APIs, distributed systems and production-grade web applications across Python, TypeScript and cloud infrastructure.",
-      },
-    ],
-  }),
-  component: Index,
-});
-
 const EMAIL = "bogdannica03@gmail.com";
 const LINKEDIN = "https://www.linkedin.com/in/bogdan-nica-666009427/";
 const GITHUB = "https://github.com/bogdannica03/";
@@ -108,7 +86,7 @@ const experience = [
   },
 ];
 
-function Index() {
+export default function App() {
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-30 border-b border-hairline bg-background/80 backdrop-blur">
@@ -134,7 +112,6 @@ function Index() {
       </header>
 
       <main id="top">
-        {/* Hero */}
         <section className="relative overflow-hidden border-b border-hairline">
           <div className="grid-bg pointer-events-none absolute inset-0 opacity-40" />
           <div className="glow-orb pointer-events-none absolute -top-24 right-0 h-96 w-96 rounded-full" />
@@ -177,7 +154,6 @@ function Index() {
           </div>
         </section>
 
-        {/* About */}
         <section id="about" className="border-b border-hairline">
           <div className="mx-auto max-w-5xl px-6 py-20">
             <p className="mono-label">01 / About</p>
@@ -205,7 +181,6 @@ function Index() {
           </div>
         </section>
 
-        {/* Skills */}
         <section id="skills" className="border-b border-hairline">
           <div className="mx-auto max-w-5xl px-6 py-20">
             <p className="mono-label">02 / Skills</p>
@@ -232,7 +207,6 @@ function Index() {
           </div>
         </section>
 
-        {/* Experience */}
         <section id="experience" className="border-b border-hairline">
           <div className="mx-auto max-w-5xl px-6 py-20">
             <p className="mono-label">03 / Experience</p>
@@ -263,7 +237,6 @@ function Index() {
           </div>
         </section>
 
-        {/* Education */}
         <section className="border-b border-hairline">
           <div className="mx-auto max-w-5xl px-6 py-20">
             <p className="mono-label">04 / Education</p>
@@ -279,7 +252,6 @@ function Index() {
           </div>
         </section>
 
-        {/* Contact */}
         <section id="contact" className="relative overflow-hidden">
           <div className="glow-orb pointer-events-none absolute bottom-0 left-1/4 h-72 w-72 rounded-full" />
           <div className="relative mx-auto max-w-5xl px-6 py-24 text-center">
