@@ -1,13 +1,18 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
-  base: "/portfolio/",
+  vite: {
+    base: "/portfolio/",
+  },
+
   tanstackStart: {
-    server: { entry: "server" },
+    server: {
+      entry: "server",
+    },
 
     spa: {
+      enabled: true,
       prerender: {
-        outputPath: "/index.html",
         crawlLinks: true,
       },
     },
