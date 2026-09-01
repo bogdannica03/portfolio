@@ -11,12 +11,16 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node
@@ -25,35 +29,23 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Verify repository
-        run: |
-          echo "Current directory:"
-          pwd
-
-          echo "Files:"
-          find . -maxdepth 2 -type f | sort
-
-          echo "Vite config:"
-          cat vite.config.ts
-
-          echo "Package:"
-          cat package.json
-
       - name: Install dependencies
         run: npm ci
 
-      - name: Build TanStack Start
+      - name: Build
         run: npm run build
 
-      - name: Verify build output
+      - name: Check generated website
         run: |
-          echo "---- .output ----"
-          find .output -maxdepth 3 -type f | sort
+          echo "===== .output/public ====="
+          find .output/public -maxdepth 2 -type f | sort
+          echo "===== index.html ====="
+          test -f .output/public/index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload static output
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: .output/public
